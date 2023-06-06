@@ -1,0 +1,142 @@
+const axios = require('axios');
+const { API_KEY } = process.env;
+const {Dog, Temperament} = require ('../db');
+const { Op } = require('sequelize');
+
+//📍 GET | /dogs
+    const getApiDogs = async () => {
+        try {
+            let apiDog = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
+            let razasApi = apiDog.data.map((raza) => {
+                return {
+                    id: raza.id,
+                    name: raza.name,
+                    image: raza.image.url,
+                    bred_for: raza.bred_for,
+                    temperament: raza.temperament,
+                    life_span: raza.life_span,
+                    weight: raza.weight.metric.split('-'),
+                    height: raza.height.metric.split('-'),
+                };
+            });
+            return razasApi;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+const getDogsDb = async () => {
+    const allDB = await Dog.findAll ({
+        through: { attributes: []},
+        include: [
+            {
+            model: Temperament,
+            through: {attributes: [] }
+        }
+    ]
+})
+const dbDogs = allDB.map(dog => {
+    return {
+        id: dog.id,
+        name: dog.name,
+        image: dog.image,
+        bred_for: dog.bredFor,
+        life_span: dog.life_span,
+        weight: dog.weight,
+        height: dog.height,
+        temperaments: dog.Temperaments.map(t => t.name),
+    }
+})
+return dbDogs;
+}
+
+const getAllDogs = async () => {
+    try {
+        let dogsDB = await getDogsDB();
+        let  dogsApi = await getApiDogs();
+    
+        const allDogs = [...dogsDB, ...dogsApi]
+    
+        return allDogs;
+        
+    } catch (error) {
+        return error
+    }
+}
+//📍 GET | /dogs/name?="..."
+    const getDogsName = async (name) => {
+        try {
+            console.log('Buscando perros con el nombre:', name);
+            const dogsDB = await Dog.findAll({
+                where: {
+                    name: {
+                        [Op.iLike]: `%${name}%`
+                    }
+                },
+                include: [
+                    {
+                        model: Temperament,
+                        through: { attributes: [] }
+                    }
+                ]
+            });
+            const dogsApi = await getApiDogs();
+            const filteredDogs = [...dogsDB, ...dogsApi].filter(dog =>
+                dog.name.toLowerCase().includes(name.toLowerCase())
+            );
+            return filteredDogs;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+
+  //📍 GET | /dogs/:idRaza
+const getDogById = async (id) => {
+    if (id.length > 20) {
+        let dogsDb = await Dog.findByPk(id, {
+            include: [
+                {
+                    model: Temperament,
+                    through: { attributes: [] }
+                }
+            ]
+        });
+        return dogsDb;
+    }else{
+        let allApi = await getApiDogs();
+        const apiId = allApi.filter(dog => dog.id == id)
+        return apiId;
+    } 
+}
+
+
+//📍 POST | /dogs
+const postDog = async (req, res) => {
+    try {
+        const {name, bred_for, life_span, weight, height, image, temperament} = req.body;
+        const newDog = await Dog.create({
+            name,
+            bred_for,
+            life_span,
+            weight,
+            height,
+            image,
+            temperament
+        });
+        await newDog.addTemperaments (temperaments)
+        return newDog;
+    } catch (error) {
+        res.status(400).send(error);
+    }
+}
+
+
+module.exports = {
+  getApiDogs,
+  getDogsDb,
+  getDogsName,
+  getDogById,
+  getAllDogs,
+  postDog,
+};
