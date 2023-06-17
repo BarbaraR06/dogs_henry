@@ -1,0 +1,50 @@
+import React from "react";
+import { getDogDetail, resetDetail } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import styles from "../css/Detail.module.css";
+import {Link} from "react-router-dom";
+
+
+const Detail = () => {
+  const dispatch = useDispatch();
+  
+  const { id } = useParams();
+  
+  
+  useEffect(() => {
+    dispatch(getDogDetail(id));
+    return () => {
+      dispatch(resetDetail());
+    };
+  }, [dispatch, id]);
+  const dogDetail = useSelector((state) => state.dogDetail);
+  
+  if (Object.keys(dogDetail).length === 0) {
+    return <div> Cargando... </div>;
+  }
+
+  const dog = dogDetail[0]; // Accede al primer elemento del array
+
+  return (
+    <div className={styles.mainContainer + " " + styles.Detail}>
+      <img src={dog.image} alt="img" />
+      <h3>ID: {dog.id} </h3>
+      <h1>Breed: {dog.name} </h1>
+      <h3>Weight:</h3>
+      <span>Min: {dog.weightMin}</span> - <span>Max: {dog.weightMax}</span>
+      <h3>Average weight: {dog.averageWeight}</h3>
+      <h3>Height (min - max): {dog.height.metric}</h3>
+      <h3>Life expectancy : {dog.life_span}</h3>
+      <h3>Temperament: {dog.temperament}</h3>
+      <p>
+        <Link to="/home">
+          <button className={styles.buttonHome}> Return </button>
+        </Link>
+      </p>
+    </div>
+  );
+};
+
+export default Detail;

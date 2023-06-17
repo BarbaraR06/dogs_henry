@@ -1,0 +1,22 @@
+.navbar{
+    display: flex;
+    justify-content:end;
+    background-color: rgb(170, 111, 22);
+    align-items: center;
+    width: 100%;
+    height: 80px;
+}
+
+
+  @font-face {
+    font-family: "Chicken";
+    src: url("../fonts/CHICKEN\ Pie.otf")
+}
+
+.navbar a{
+    font-size: 30px;
+    text-align: center;
+    font-family: "Chicken";
+    color:rgb(255, 255, 255);
+    margin-right: 20px; 
+}

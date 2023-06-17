@@ -1,122 +1,184 @@
-import { 
-GET_DOGS_FROM_API,
-GET_DOGS_FROM_DB,
-GET_DOGS_BY_QUERY,
-GET_ALL_DOGS,
-GET_DOG_DETAILS,
-GET_TEMPERAMENTS,
-FILTER_BY_TEMPERAMENT,
-SORT_BY_WEIGHT,
-SORT_ALPHABETICALLY,
-RESET_ARRAYS,
-} from '../actions/index';
+import {
+  CREATE_DOG,
+  GET_ALL_DOGS,
+  GET_ALL_TEMPS,
+  GET_DOG_BY_NAME,
+  GET_DOG_DETAIL,
+  GET_NAME, 
+  ORDER_BY_NAME,
+  ORDER_BY_WEIGHT,
+  FILTER_BY_ORIGIN,
+  FILTER_BY_TEMPER,
+  RESET_DETAIL,
+  SET_CURRENT_PAGE,
+} from "../actionTypes";
 
 const initialState = {
-    allDogs: [],
-    dogsFromApi: [],
-    dogsFromDb: [],
-    dogDetails: {},
-    temperaments: [],
-    filteredDogs: [],
-    searchedDogs: [],
+  currentPage: 1,
+  dogs: [],
+  dogDetail: {},
+  temperaments: [],
+  allDogs: [],
 };
 
-const rootReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case GET_ALL_DOGS:
-            return {
-                ...state,
-                allDogs: action.payload
-            };
+const reducer = (state = initialState, action) => {
+  let arr = [];
 
-        case GET_DOGS_FROM_DB:
-            return {
-                ...state,
-                dogsFromDb: [...state.allDogs].filter((dog) => !Number(dog.id)),
-            };
+  switch (action.type) {
+    case CREATE_DOG:
+      return {
+        ...state,
+      };
 
-        case GET_DOGS_FROM_API:
-            return {
-                ...state,
-                dogsFromApi: [...state.allDogs].filter((dog) => typeof dog.id === 'number')
-            };
+    case GET_ALL_DOGS:
+      return {
+        ...state,
+        dogs: action.payload,
+        allDogs: action.payload,
+      };
 
-        case GET_DOGS_BY_QUERY:
-            return {
-                ...state,
-                searchedDogs: action.payload,
-            };
+    case GET_ALL_TEMPS:
+      return {
+        ...state,
+        temperaments: action.payload,
+      };
 
-        case GET_DOG_DETAILS:
-            return {
-                ...state,
-                dogDetails: action.payload,
-            };
+    case GET_DOG_BY_NAME:
+      return {
+        ...state,
+        dogs: action.payload,
+      };
+    case GET_DOG_DETAIL:
+      return {
+        ...state,
+        dogDetail: action.payload,
+      };
 
-        case GET_TEMPERAMENTS:
-            return {
-                ...state,
-                temperaments: action.payload,
-            };
+    case GET_NAME:
+      let name =
+        action.payload === ""
+          ? state.allDogs
+          : state.dogs.filter((inst) =>
+              inst.name.toLowerCase().includes(action.payload.toLowerCase())
+            );
+      return {
+        ...state,
+        dogs: name,
+      };
 
-        case FILTER_BY_TEMPERAMENT:
-            const dogsFromApiFiltered = [...state.allDogs].filter((dog) => dog.temperament.includes(action.payload));
-            const dogsFromDbFiltered = [...state.dogsFromDb].filter((dog) => Array.isArray(dog.temperament));
-            let dogsFromDbFilteredByTemperament = [];
-            for (const dog of dogsFromDbFiltered) {
-                for (const temperament of dog.temperament) {
-                    if (temperament.name === action.payload) {
-                        dogsFromDbFilteredByTemperament.push(dog);
-                    }
-                }
-            }
-            return {
-                ...state,
-                filteredDogs: [...dogsFromApiFiltered, ...dogsFromDbFilteredByTemperament],
-            };
+    case ORDER_BY_NAME:
+      let order =
+        action.payload === "a-z"
+          ? state.dogs.sort((a, b) => {
+              if (a.name < b.name) {
+                return -1;
+              }
+              if (a.name > b.name) {
+                return 1;
+              }
+              return 0;
+            })
+          : state.dogs.sort((a, b) => {
+              if (a.name > b.name) {
+                return -1;
+              }
+              if (a.name < b.name) {
+                return 1;
+              }
+              return 0;
+            });
+      return {
+        ...state,
+        dogs: order,
+      };
 
-        case SORT_BY_WEIGHT:
-            const selectWeight = (dog) => Number(dog.weight.split('')[dog.weight.split('').length - 2]);
+    case ORDER_BY_WEIGHT:
+      if (action.payload === "min") {
+        arr = state.dogs.sort((a, b) => {
+          if (a.weight < b.weight) {
+            return -1;
+          }
+          if (a.weight > b.weight) {
+            return 1;
+          }
+          return 0;
+        });
+      } else if (action.payload === "max") {
+        arr = state.dogs.sort((a, b) => {
+          if (a.weight > b.weight) {
+            return -1;
+          }
+          if (a.weight < b.weight) {
+            return 1;
+          }
+          return 0;
+        });
+      } else if (action.payload === "ave") {
+        arr = state.dogs.sort((a, b) => {
+          if (a.weight > b.weight) {
+            return -1;
+          }
+          if (a.weight < b.weight) {
+            return 1;
+          }
+          return 0;
+        });
+      } else if (action.payload === "ave-max") {
+        arr = state.dogs.sort((a, b) => {
+          if (a.weight > b.weight) {
+            return -1;
+          }
+          if (a.weight < b.weight) {
+            return 1;
+          }
+          return 0;
+        });
+      } else {
+        console.log("error");
+      }
+      return {
+        ...state,
+        dogs: arr,
+      };
 
-            if (action.payload === 'ascending') {
-                return {
-                    ...state,
-                    allDogs: [...state.allDogs].sort((a, b) => selectWeight(a) - selectWeight(b)),
-                };
-            }
-            return {
-                ...state,
-                allDogs: [...state.allDogs].sort((a, b) => selectWeight(b) - selectWeight(a)),
-            };
+    case FILTER_BY_ORIGIN:
+      const filterByOrigin =
+        action.payload === "created"
+          ? state.allDogs.filter((inst) => inst.created)
+          : state.allDogs.filter((inst) => !inst.created);
+      return {
+        ...state,
+        dogs: action.payload === "All" ? state.allDogs : filterByOrigin,
+      };
 
-        case SORT_ALPHABETICALLY:
-            if (action.payload === 'ascending') {
-                return {
-                    ...state,
-                    allDogs: [...state.allDogs].sort((a, b) => a.name.localeCompare(b.name)),
-                };
-            }
-            return {
-                ...state,
-                allDogs: [...state.allDogs].sort((a, b) => b.name.localeCompare(a.name)),
-            };
+    case FILTER_BY_TEMPER:
+      let dogsTemps =
+        action.payload === "all"
+          ? state.allDogs
+          : state.allDogs?.filter((dog) => {
+              if (!dog.temperament) return undefined;
+              return dog.temperament.split(", ").includes(action.payload);
+            });
+      return {
+        ...state,
+        dogs: dogsTemps,
+      };
 
-        case RESET_ARRAYS:
-            return {
-                ...state,
-                dogsFromApi: [],
-                dogsFromDb: [],
-                filteredDogs: [],
-                searchedDogs: [],
-            };
+    case RESET_DETAIL:
+      return {
+        ...state,
+        dogDetail: {},
+      };
 
-        default:
-            return state;
-    }
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.payload,
+      };
+
+    default:
+      return { ...state };
+  }
 };
 
-
-
-
-
-export default rootReducer;
+export default reducer;
