@@ -17,8 +17,8 @@ import {
 
 export const createNewDog = (payload) => {
   return async (dispatch) => {
-    let response = await axios.post("http://localhost:3001/dogs", payload);
-    return response;
+    let newDog = await axios.post("http://localhost:3001/dogs", payload);
+    return newDog;
   };
 };
 

@@ -2,20 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "../css/Card.module.css";
 
-const Card = ({ image, name, id, temperament, weight }) => {
+const Card = ({ image, name, id, temperament,  weightMin, weightMax, averageWeight, }) => {
   return (
     <div className={style.card}>
       <Link to={`/home/${id}`}>
         <p className={style.nombre}>{name}</p>
-        <img src={image} alt={`Fotito of ${name}`} />
+        <img src={image} alt={` ${name}`} />
       </Link>
       <div>
-        <p>Temperamento: </p>
+        <p> Temperament: </p>
         <p>{temperament}</p>
       </div>
       <div>
-        <p> Peso: </p>
-        <p>{weight}</p>
+      <p> Weight:</p>
+                <p>Min: {weightMin}</p>
+                <p>Max: {weightMax}</p>
       </div>
     </div>
   );

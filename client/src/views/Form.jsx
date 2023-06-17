@@ -4,6 +4,7 @@ import { createNewDog, getAllTemperaments } from "../redux/actions";
 import validate from "../components/Validate";
 import { Link } from "react-router-dom";
 import style from "../css/Form.module.css";
+import { Navigate } from "react-router-dom";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -19,11 +20,8 @@ const Form = () => {
     weightMin: "",
     temperament: [],
   });
-   
-  const [selectedFile, setSelectedFile] = useState(null);
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
+
+  const [redirectToHome, setRedirectToHome] = useState(false);
 
   const [errors, setErrors] = useState({});
 
@@ -64,20 +62,9 @@ const Form = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-  
-    const formData = new FormData();
-    formData.append("image", selectedFile);
-  
-    const dogData = {
-      ...inputs,
-      image: formData,
-    };
-  
-    dispatch(createNewDog(dogData));
+    dispatch(createNewDog(inputs));
     console.log(inputs);
     alert("Dog created");
-  
-    // Restablece los valores
     setInputs({
       name: "",
       height: "",
@@ -87,8 +74,8 @@ const Form = () => {
       weightMin: "",
       temperament: [],
     });
-    setSelectedFile(null);
     setErrors({});
+    setRedirectToHome(true);
   };
 
   useEffect(() => {
@@ -97,8 +84,9 @@ const Form = () => {
 
   return (
     <div>
+      {redirectToHome && <Navigate to="/home" />} 
       <Link to="/home" className={style.button}>
-        Go back
+        Go back 
       </Link>
       <form className={style.Formulario}>
         <div className={style.inputs}>
@@ -117,11 +105,15 @@ const Form = () => {
           <br />
 
           <div>
-            <label>
-              Image:
-              <input type="file" accept="image/*" onChange={handleFileChange} />
-              {errors.image && <strong>{errors.image}</strong>}
-            </label>
+            <label> Image: </label>
+            <input
+              type="text"
+              name="image"
+              value={inputs.image}
+              placeholder={"Images in jpg format "}
+              onChange={(event) => handleInputs(event)}
+            />
+            {errors.image && <strong>{errors.image}</strong>}
           </div>
 
           <br />
@@ -192,7 +184,11 @@ const Form = () => {
                 <option className={style.opciones} value="all"></option>
                 {temperaments.map((temp) => {
                   return (
-                    <option className={style.opciones} value={temp} key={temp}>
+                    <option
+                      className={style.opciones}
+                      value={temp}
+                      key={temp}
+                    >
                       {temp}
                     </option>
                   );

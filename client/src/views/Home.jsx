@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import {
   getAllDogs,
   getAllTemperaments,
@@ -58,7 +58,7 @@ const Home = () => {
   };
 
   const handleOrderWeight2 = (event) => {
-    dispatch(filterByTemper(event.target.value));
+    dispatch(orderByWeight(event.target.value));
     dispatch(setCurrentPage(1));
     setOrder(`Ordered ${event.target.value}`);
     setFilter({

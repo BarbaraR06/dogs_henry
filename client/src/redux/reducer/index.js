@@ -92,54 +92,39 @@ const reducer = (state = initialState, action) => {
         dogs: order,
       };
 
-    case ORDER_BY_WEIGHT:
-      if (action.payload === "min") {
-        arr = state.dogs.sort((a, b) => {
-          if (a.weight < b.weight) {
-            return -1;
-          }
-          if (a.weight > b.weight) {
-            return 1;
-          }
-          return 0;
-        });
-      } else if (action.payload === "max") {
-        arr = state.dogs.sort((a, b) => {
-          if (a.weight > b.weight) {
-            return -1;
-          }
-          if (a.weight < b.weight) {
-            return 1;
-          }
-          return 0;
-        });
-      } else if (action.payload === "ave") {
-        arr = state.dogs.sort((a, b) => {
-          if (a.weight > b.weight) {
-            return -1;
-          }
-          if (a.weight < b.weight) {
-            return 1;
-          }
-          return 0;
-        });
-      } else if (action.payload === "ave-max") {
-        arr = state.dogs.sort((a, b) => {
-          if (a.weight > b.weight) {
-            return -1;
-          }
-          if (a.weight < b.weight) {
-            return 1;
-          }
-          return 0;
-        });
-      } else {
-        console.log("error");
-      }
-      return {
-        ...state,
-        dogs: arr,
-      };
+      case ORDER_BY_WEIGHT:
+        if (action.payload === "min") {
+            arr = state.dogs.sort ((dogA, dogB) => {
+                if (dogA.weightMin < dogB.weightMin) return -1;
+                if (dogA.weightMin > dogB.weightMin) return 1;
+                return 0;
+            });    
+        } else if (action.payload === "max") {
+            arr = state.dogs.sort ((dogA, dogB) => {
+                if (dogA.weightMax > dogB.weightMax) return -1;
+                if (dogA.weightMax < dogB.weightMax) return 1;
+                return 0;
+            });
+        } else if (action.payload === "ave"){
+            arr = state.dogs.sort ((dogA, dogB) => {
+                if (dogA.averageWeight < dogB.averageWeight) return -1;
+                if (dogA.averageWeight > dogB.averageWeight) return 1;
+                return 0;
+            });
+        }else if (action.payload === "ave-max") {
+            arr = state.dogs.sort ((dogA, dogB) => {
+                if (dogA.averageWeight > dogB.averageWeight) return -1;
+                if (dogA.averageWeight < dogB.averageWeight) return 1;
+                return 0;
+            });
+        } else {
+            console.log("error");
+        }
+
+        return {
+            ...state,
+            dogs: arr,
+        };
 
     case FILTER_BY_ORIGIN:
       const filterByOrigin =
