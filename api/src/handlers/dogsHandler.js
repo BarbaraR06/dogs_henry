@@ -56,8 +56,8 @@ const getDogsByNameHandler = async (req, res) => {
 const createNewDogHandler = async (req, res) => {
   let payload = req.body;
   try {
-    await postDog(payload);
-    res.status(200).send("Nuevo perrito creado exitosamente");
+    const newDog = await postDog(payload);
+    res.status(200).json({ dog: newDog }); // Envia los datos del perro creado
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

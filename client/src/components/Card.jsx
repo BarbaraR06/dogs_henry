@@ -1,16 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../css/Card.module.css";
+import descarga from "../img/descarga.jfif";
 
 const Card = ({ image, name, id, temperament, weightMin, weightMax }) => {
   const handleClickFront = (e) => {
     e.stopPropagation();
-    // Lógica adicional si es necesario
+
   };
 
   const handleClickBack = (e) => {
     e.stopPropagation();
-    // Lógica adicional si es necesario
+
   };
 
   return (
@@ -20,7 +21,7 @@ const Card = ({ image, name, id, temperament, weightMin, weightMax }) => {
           <Link to={`/home/${id}`} onClick={handleClickFront}>
             <p className={styles.nombre}>{name}</p>
             <Link to={`/home/${id}`} onClick={handleClickFront}>
-              <img src={image} alt={name} className={styles.cardImage} />
+              <img src={image || descarga } alt={name} className={styles.cardImage} />
             </Link>
           </Link>
         </div>

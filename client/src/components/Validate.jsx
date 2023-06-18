@@ -1,15 +1,12 @@
 const validate = ({
   name,
   height,
-  image,
   life_span,
   weightMax,
   weightMin,
   temperament,
 }) => {
   let errors = {};
-  let regexImg =
-    /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
   let regexName = /^[a-zA-Z]+$/;
 
   if (!name.trim()) {
@@ -44,11 +41,6 @@ const validate = ({
   }
   if (!life_span) {
     errors.life_span = "Please choose an approximate life span";
-  }
-  if (!image.trim()) {
-    errors.image = "Please insert an image";
-  } else if (!regexImg.test(image.trim())) {
-    errors.image = "Please insert a valid file";
   }
   if (!temperament) {
     errors.temperament = "Please choose at least one temperament";

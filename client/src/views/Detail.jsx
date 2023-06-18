@@ -26,14 +26,14 @@ const Detail = () => {
     return <div> Cargando... </div>;
   }
 
-  const dog = dogDetail[0]; // Accede al primer elemento del array
+  const dog = Array.isArray(dogDetail) ? dogDetail[0] : dogDetail;
 
   return (
     <div className={styles.mainContainer + " " + styles.Detail}>
       <NavBar className={styles.navBar} />
       <div className={styles.contentContainer}>
         <div className={styles.imageContainer}>
-          <img src={dog.image} alt="img" />
+          <img src={dog?.image} alt="img" />
         </div>
         <div className={styles.textContainer}>
           <p>
@@ -41,14 +41,14 @@ const Detail = () => {
               <button className={styles.buttonHome}>Return</button>
             </Link>
           </p>
-          <h3>Id: {dog.id}</h3>
-          <h1>Breed: {dog.name}</h1>
+          <h3>Id: {dog?.id}</h3>
+          <h1>Breed: {dog?.name}</h1>
           <h3>Weight:</h3>
-          <span>Min: {dog.weightMin}</span> - <span>Max: {dog.weightMax}</span>
-          <h3>Average weight: {dog.averageWeight}</h3>
-          <h3>Height (min - max): {dog.height.metric}</h3>
-          <h3>Life expectancy: {dog.life_span}</h3>
-          <h3>Temperament: {dog.temperament}</h3>
+          <span>Min: {dog?.weightMin}</span> - <span>Max: {dog?.weightMax}</span>
+          <h3>Average weight: {dog?.averageWeight}</h3>
+          <h3>Height (min - max): {dog?.height.metric}</h3>
+          <h3>Life expectancy: {dog?.life_span}</h3>
+          <h3>Temperament: {dog?.temperament}</h3>
         </div>
       </div>
     </div>

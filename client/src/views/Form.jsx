@@ -5,6 +5,7 @@ import validate from "../components/Validate";
 import { Link } from "react-router-dom";
 import styles from "../css/Form.module.css";
 import { Navigate } from "react-router-dom";
+import descarga from "../img/descarga.jfif";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const Form = () => {
   const [inputs, setInputs] = useState({
     name: "",
     height: "",
-    image: "",
+    image: descarga,
     life_span: "",
     weightMax: "",
     weightMin: "",
@@ -36,7 +37,7 @@ const Form = () => {
   const handleTemperament = (event) => {
     let { value } = event.target;
     if (inputs.temperament.includes(value)) {
-      return alert("Temperaments can not be repeated");
+      return alert("Temperaments cannot be repeated");
     }
     if (value === "all") {
       return;
@@ -68,7 +69,7 @@ const Form = () => {
     setInputs({
       name: "",
       height: "",
-      image: "",
+      image: descarga,
       life_span: "",
       weightMax: "",
       weightMin: "",
@@ -78,25 +79,31 @@ const Form = () => {
     setRedirectToHome(true);
   };
 
+  const handleSelectDefaultImage = () => {
+    setInputs({
+      ...inputs,
+      image: descarga,
+    });
+  };
+  
   useEffect(() => {
     dispatch(getAllTemperaments());
   }, []);
 
   return (
     <div>
-      {redirectToHome && <Navigate to="/home" />} 
+      {redirectToHome && <Navigate to="/home" />}
       <Link to="/home" className={styles.button}>
-        Go back 
+        Go back
       </Link>
       <form className={styles.Formulario}>
         <div className={styles.inputs}>
           <div>
-            <label>Name: </label>
+            <label>Name:</label>
             <input
               type="text"
               name="name"
               value={inputs.name}
-              placeholder={"For example: Fatiga"}
               onChange={(event) => handleInputs(event)}
             />
             {errors.name && <strong>{errors.name}</strong>}
@@ -105,42 +112,28 @@ const Form = () => {
           <br />
 
           <div>
-            <label> Image: </label>
-            <input
-              type="text"
-              name="image"
-              value={inputs.image}
-              placeholder={"Images in jpg format "}
-              onChange={(event) => handleInputs(event)}
-            />
-            {errors.image && <strong>{errors.image}</strong>}
-          </div>
-
-          <br />
-
-          <div>
-            <label> Weight </label>
-            <br />
-            <br />
-            <label> Min (kg): </label>
-            <input
-              type="text"
-              name="weightMin"
-              value={inputs.weightMin}
-              onChange={(event) => handleInputs(event)}
-            />
-            {errors.weightMin && <strong>{errors.weightMin}</strong>}
-
-            <br />
-
-            <label> Max (kg): </label>
-            <input
-              type="text"
-              name="weightMax"
-              value={inputs.weightMax}
-              onChange={(event) => handleInputs(event)}
-            />
-            {errors.weightMax && <strong>{errors.weightMax}</strong>}
+            <label>
+              Weight
+              <br />
+              <br />
+              Min (kg):
+              <input
+                type="text"
+                name="weightMin"
+                value={inputs.weightMin}
+                onChange={(event) => handleInputs(event)}
+              />
+              {errors.weightMin && <strong>{errors.weightMin}</strong>}
+              <br />
+              Max (kg):
+              <input
+                type="text"
+                name="weightMax"
+                value={inputs.weightMax}
+                onChange={(event) => handleInputs(event)}
+              />
+              {errors.weightMax && <strong>{errors.weightMax}</strong>}
+            </label>
           </div>
 
           <br />
@@ -194,7 +187,7 @@ const Form = () => {
                   );
                 })}
               </select>
-              <h4> My dog is...</h4>
+              <h4>My dog is...</h4>
               {inputs.temperament.map((temp) => (
                 <div className={styles.toDelete} key={temp}>
                   <p>{temp}</p>
@@ -207,7 +200,6 @@ const Form = () => {
                 className={styles.button}
                 disabled={
                   errors.name ||
-                  errors.image ||
                   errors.weightMin ||
                   errors.weightMax ||
                   errors.height ||
@@ -219,6 +211,13 @@ const Form = () => {
                 Add my dog
               </button>
               {errors.temperament && <strong>{errors.temperament}</strong>}
+              <button
+                type="button"
+                onClick={handleSelectDefaultImage}
+                className={styles.button}
+              >
+                Select Default Image
+              </button>
             </div>
           </label>
         </div>
