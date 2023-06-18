@@ -13,7 +13,7 @@ const Pagination = ({ dogsPerPage, dogs, pagination }) => {
   
     return (
       <nav>
-        <ul>
+        <ul className={styles.numbersPagination}>
           {pageNumbers.map((number) => (
             <li key={number}>
               <button

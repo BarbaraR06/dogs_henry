@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createNewDog, getAllTemperaments } from "../redux/actions";
 import validate from "../components/Validate";
 import { Link } from "react-router-dom";
-import style from "../css/Form.module.css";
+import styles from "../css/Form.module.css";
 import { Navigate } from "react-router-dom";
 
 const Form = () => {
@@ -85,11 +85,11 @@ const Form = () => {
   return (
     <div>
       {redirectToHome && <Navigate to="/home" />} 
-      <Link to="/home" className={style.button}>
+      <Link to="/home" className={styles.button}>
         Go back 
       </Link>
-      <form className={style.Formulario}>
-        <div className={style.inputs}>
+      <form className={styles.Formulario}>
+        <div className={styles.inputs}>
           <div>
             <label>Name: </label>
             <input
@@ -179,13 +179,13 @@ const Form = () => {
 
           <label>
             Temperaments:
-            <div className={style.temperaments}>
+            <div className={styles.temperaments}>
               <select onChange={(event) => handleTemperament(event)}>
-                <option className={style.opciones} value="all"></option>
+                <option className={styles.opciones} value="all"></option>
                 {temperaments.map((temp) => {
                   return (
                     <option
-                      className={style.opciones}
+                      className={styles.opciones}
                       value={temp}
                       key={temp}
                     >
@@ -194,9 +194,9 @@ const Form = () => {
                   );
                 })}
               </select>
-              <h4>My dog is...</h4>
+              <h4> My dog is...</h4>
               {inputs.temperament.map((temp) => (
-                <div className={style.toDelete} key={temp}>
+                <div className={styles.toDelete} key={temp}>
                   <p>{temp}</p>
                   <button onClick={() => handleDelete(temp)}>X</button>
                 </div>
@@ -204,7 +204,7 @@ const Form = () => {
               <button
                 type="submit"
                 onClick={(event) => handleSubmit(event)}
-                className={style.button}
+                className={styles.button}
                 disabled={
                   errors.name ||
                   errors.image ||

@@ -1,7 +1,7 @@
 .navbar{
     display: flex;
     justify-content:flex-end;
-    background-color: rgb(170, 111, 22);
+    background-color: #151F2F;
     align-items: center;
     width: 100%;
     height: 80px;

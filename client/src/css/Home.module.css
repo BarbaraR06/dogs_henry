@@ -1,0 +1,63 @@
+@font-face {
+  font-family: "Chicken";
+  src: url("../fonts/CHICKEN\ Pie.otf")
+}
+  .filterSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .filterSection select {
+    padding: 10px;
+    border: 2px solid #1AB3AB;
+    border-radius: 15px;
+    margin-right: 10px;
+    font-size: 15px;
+    width: 250px;
+    font-family: "Cardo";
+  }
+  
+  .filterSection select:first-child {
+    width: 250px;
+    font-family: "Cardo";
+  }
+  
+  .filterSection select:last-child {
+    margin-right: 0;
+    font-family: "Cardo";
+  }
+  
+  .filterSection option[disabled] {
+    color: #888888;
+    font-family: "Cardo";
+  }
+  
+  .filterSection option[selected] {
+    font-weight: bold;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    max-width:100%;
+  }
+  .buttonAllDogs{
+    padding: 10px 20px;
+    background-color: #F8EFAF;
+    color: #000000;
+    border: none;
+    font-family: "Chicken";
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    margin-left: 20%;
+  }
+
+  .buttonAllDogs:hover {
+    background-color: #5B4D74;
+  }

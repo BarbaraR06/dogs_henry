@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   getAllDogs,
   getAllTemperaments,
@@ -29,6 +29,8 @@ const Home = () => {
     weight: "weight",
     aver: "aver",
   });
+
+  const dogs = useSelector((state) => state.dogs);
 
   const temperaments = useSelector((state) =>
     [...state.temperaments].sort((a, b) => {
@@ -101,10 +103,6 @@ const Home = () => {
     });
   };
 
-  const Pagination = (pageNumbers) => {
-    setCurrentPage(pageNumbers);
-  };
-
   useEffect(() => {
     dispatch(getAllDogs());
     dispatch(getAllTemperaments());
@@ -114,10 +112,10 @@ const Home = () => {
     <>
       <NavBar />
       <div className={styles.container}>
+        <SearchBar className={styles.search}/>
         <button className={styles.buttonAllDogs} onClick={(event) => handleClick(event)}>
           All Dogs
-        </button>
-        <SearchBar />
+        </button> 
       </div>
 
       <br />
@@ -126,7 +124,7 @@ const Home = () => {
         <section className={styles.filterSection}>
           <select value={filter.name} onChange={(event) => handleOrderName(event)}>
             <option value="" disabled defaultValue>
-              Ordenar alfabéticamente
+              Order alphabetically
             </option>
             <option value="a-z"> A - Z</option>
             <option value="z-a"> Z - A</option>
@@ -134,28 +132,28 @@ const Home = () => {
 
           <select value={filter.weight} onChange={(event) => handleOrderWeight(event)}>
             <option value="" disabled defaultValue>
-              Ordenar por peso
+              Sort by weight
             </option>
-            <option value="min">Más livianos</option>
-            <option value="max">Más pesados</option>
+            <option value="min"> Lighter </option>
+            <option value="max"> Heavier </option>
           </select>
 
           <select value={filter.aver} onChange={(event) => handleOrderWeight2(event)}>
             <option value="" disabled defaultValue>
-              Ordenar por peso promedio
+              Sort by average weight
             </option>
-            <option value="ave">Promedio más liviano</option>
-            <option value="ave-max">Promedio más pesado</option>
+            <option value="ave"> Lighter average </option>
+            <option value="ave-max"> Heavier average </option>
           </select>
 
           <select value={filter.origin} onChange={(event) => handleFilterByOrigin(event)}>
-            <option value="All">Todos los perros</option>
-            <option value="api">Perros de la API</option>
-            <option value="created">Perros creados por el usuario</option>
+            <option value="All"> All the dogs </option>
+            <option value="api"> API dogs </option>
+            <option value="created"> Dogs created by me </option>
           </select>
 
           <select value={filter.temperament} onChange={(event) => handleFilterByTemper(event)}>
-            <option value="all">Todos los temperamentos</option>
+            <option value="all"> All temperaments </option>
             {temperaments.map((temp) => {
               return (
                 <option value={temp} key={temp}>
@@ -168,7 +166,7 @@ const Home = () => {
       </div>
 
       <div>
-        <CardsContainer />
+      <CardsContainer/>
       </div>
     </>
   );

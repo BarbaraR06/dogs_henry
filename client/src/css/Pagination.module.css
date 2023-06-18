@@ -1,0 +1,34 @@
+.numbersPagination {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagesPagination {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+  
+  .numButtonPagination {
+    display: block;
+    padding: 10px 12px;
+    background-color: #F8EFAF;
+    color: #000000;
+    font-family: "Cardo";
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  
+  .numButtonPagination:hover {
+    background-color: #7c602c;
+  }

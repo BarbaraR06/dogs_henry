@@ -2,9 +2,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import Pagination from "./Pagination";
 import Card from "./Card";
-import style from "../css/CardsContainer.module.css";
+import styles from "../css/CardsContainer.module.css";
 
 const CardsContainer = () => {
+
     const dogs = useSelector((state) => state.dogs);
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -23,9 +24,11 @@ const CardsContainer = () => {
                 dogs={dogs.length}
                 pagination={pagination} />
             </div>
-            <div className={style.container}>
+
+            <div className={styles.container}>
                 {currentDogs.map((dog) => {
                     return <Card 
+                    id={dog.id}
                     key={dog.id}
                     name={dog.name}
                     temperament={dog.temperament}

@@ -1,29 +1,35 @@
-.content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .content input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-top: 5px;
-    width: 300px;
-  }
-  
-  .content button {
-    padding: 10px 20px;
-    background-color: #3f51b5;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .content button:hover {
-    background-color: #2c3e8c;
-  }
-  
+
+body{
+  background: #f2f2f2;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  margin-right: 300px;
+}
+
+
+.input {
+  width: 600px;
+  height: 40px;
+  margin-right: 10px; 
+  background-color: #1AB3AB;
+  background-image: url("../img/search.png");
+  background-repeat: no-repeat;
+  background-position: 560px 10px;
+  background-size: 3%;
+  padding-left: 40px;
+
+}
+
+.input-text-color{
+  color: white;
+  font-size: 17px;
+  font-family: "Cardo";
+}
+
+.input::placeholder {
+  color: rgb(255, 255, 255); /* Cambia "red" al color deseado */
+}
