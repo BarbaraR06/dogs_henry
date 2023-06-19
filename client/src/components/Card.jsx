@@ -18,9 +18,7 @@ const Card = ({ image, name, id, temperament, weightMin, weightMax }) => {
       <div className={`${styles.card}`}>
         <div className={styles.front}>
             <p className={styles.nombre}>{name}</p>
-            <Link to={`/home/${id}`} onClick={handleClickFront}>
-              <img src={image} alt={name} className={styles.cardImage} />
-            </Link>
+          <img src={image} alt={name} className={styles.cardImage} />
         </div>
         <div className={styles.back}>
           <div>

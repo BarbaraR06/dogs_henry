@@ -207,8 +207,7 @@ const Form = () => {
                   !inputs.temperament.length ||
                   !inputs.name
                 }
-              >
-                Add dog to the database
+              > Add dog to the database
               </button>
               {errors.temperament && <strong>{errors.temperament}</strong>}
             </div>
