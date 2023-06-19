@@ -55,11 +55,8 @@ const Detail = () => {
           <h3>Average weight: {dog?.averageWeight}</h3>
           <h3>Height (min - max): {dog?.height.metric}</h3>
           <h3>Life expectancy: {dog?.life_span}</h3>
-          {isFromDatabase ? (
-            <h3>Temperament from database: {temperaments}</h3>
-          ) : (
-            <h3>Temperament from API: {temperaments}</h3>
-          )}
+          {isFromDatabase && <h3>Temperament from database: {temperaments}</h3>}
+          {!isFromDatabase && <h3>Temperament from API: {temperaments}</h3>}
         </div>
       </div>
     </div>
