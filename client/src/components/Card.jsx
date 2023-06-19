@@ -23,11 +23,15 @@ const Card = ({ image, name, id, temperament, weightMin, weightMax }) => {
             </Link>
         </div>
         <div className={styles.back}>
+          <div>
           <p>Temperament:</p>
           <p>{temperament}</p>
+          </div>
+          <div>
           <p>Weight:</p>
           <p>Min: {weightMin}</p>
           <p>Max: {weightMax}</p>
+          </div>
           <Link className={styles.link} to={`/home/${id}`} onClick={handleClickBack}>
             More details
           </Link>
