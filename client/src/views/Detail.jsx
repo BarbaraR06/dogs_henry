@@ -7,7 +7,7 @@ import styles from "../css/Detail.module.css";
 import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 
-const Detail = () => {
+const Detail = ({temperament}) => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -25,15 +25,8 @@ const Detail = () => {
   }
 
   const dog = Array.isArray(dogDetail) ? dogDetail[0] : dogDetail;
-  let temperaments = dog.temperament;
-  let isFromDatabase = false;
 
-  // Verificar si el campo temperamento es un array
-  if (Array.isArray(temperaments)) {
-    temperaments = temperaments.join(", ");
-    isFromDatabase = true;
-  }
-
+  
   return (
     <div className={styles.mainContainer + " " + styles.Detail}>
       <NavBar className={styles.navBar} />
@@ -55,8 +48,7 @@ const Detail = () => {
           <h3>Average weight: {dog?.averageWeight}</h3>
           <h3>Height (min - max): {dog?.height.metric}</h3>
           <h3>Life expectancy: {dog?.life_span}</h3>
-          {isFromDatabase && <h3>Temperament from database: {temperaments}</h3>}
-          {!isFromDatabase && <h3>Temperament from API: {temperaments}</h3>}
+          <h3>{temperament}</h3>
         </div>
       </div>
     </div>
