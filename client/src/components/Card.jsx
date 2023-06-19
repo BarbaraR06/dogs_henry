@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import styles from "../css/Card.module.css";
 import descarga from "../img/descarga.jfif";
 
-const Card = ({ image, name, id, temperament, weightMin, weightMax, created}) => {
+const Card = ({ image, name, id, temperament, weightMin, weightMax }) => {
   const handleClickFront = (e) => {
     e.stopPropagation();
 
   };
- 
+
   const handleClickBack = (e) => {
     e.stopPropagation();
 
