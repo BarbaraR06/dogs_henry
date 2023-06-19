@@ -17,8 +17,8 @@ const Form = () => {
     height: "",
     image: "",
     life_span: "",
-    weightMax: "0",
-    weightMin: "0",
+    weightMax: "",
+    weightMin: "",
     temperament: [],
   });
 
@@ -71,8 +71,8 @@ const Form = () => {
       height: "",
       image: "",
       life_span: "",
-      weightMax: "0",
-      weightMin: "0",
+      weightMax: "",
+      weightMin: "",
       temperament: [],
     });
     setErrors({});

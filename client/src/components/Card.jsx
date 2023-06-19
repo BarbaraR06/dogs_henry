@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../css/Card.module.css";
-import descarga from "../img/descarga.jfif";
 
 const Card = ({ image, name, id, temperament, weightMin, weightMax }) => {
   const handleClickFront = (e) => {
@@ -20,7 +19,7 @@ const Card = ({ image, name, id, temperament, weightMin, weightMax }) => {
         <div className={styles.front}>
             <p className={styles.nombre}>{name}</p>
             <Link to={`/home/${id}`} onClick={handleClickFront}>
-              <img src={image || descarga } alt={name} className={styles.cardImage} />
+              <img src={image} alt={name} className={styles.cardImage} />
             </Link>
         </div>
         <div className={styles.back}>
