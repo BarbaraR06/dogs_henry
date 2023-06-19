@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import styles from "../css/Card.module.css";
 import descarga from "../img/descarga.jfif";
 
-const Card = ({ image, name, id, temperament, weightMin, weightMax }) => {
+const Card = ({ image, name, id, temperament, weightMin, weightMax, created}) => {
   const handleClickFront = (e) => {
     e.stopPropagation();
 
   };
-
+ 
   const handleClickBack = (e) => {
     e.stopPropagation();
 
@@ -18,12 +18,10 @@ const Card = ({ image, name, id, temperament, weightMin, weightMax }) => {
     <div className={`${styles.flipContainer} ${styles.flip}`}>
       <div className={`${styles.card}`}>
         <div className={styles.front}>
-          <Link to={`/home/${id}`} onClick={handleClickFront}>
             <p className={styles.nombre}>{name}</p>
             <Link to={`/home/${id}`} onClick={handleClickFront}>
               <img src={image || descarga } alt={name} className={styles.cardImage} />
             </Link>
-          </Link>
         </div>
         <div className={styles.back}>
           <p>Temperament:</p>

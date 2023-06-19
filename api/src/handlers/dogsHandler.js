@@ -2,7 +2,9 @@ const {
   getAllDogs,
   getDogsName,
   getDogById,
-  postDog, } = require('../controllers/controllerDog');
+  postDog,
+  updateDog, 
+  deleteDog } = require('../controllers/controllerDog');
 
 
 //📍 GET | /dogs
@@ -63,6 +65,29 @@ const createNewDogHandler = async (req, res) => {
   }
 };
 
+//📍 PUT | /dogs
+const updateDogHandler = async (req, res) => {
+  const { id } = req.params; //para obtener el identificador unico del perro
+  const data = req.body; //body se utiliza para obtener los datos actualizados del perro
+
+  try {
+    const result = await updateDog(id, data);
+    res.status(200).json({ message: "Dog updated", result });
+  } catch {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const deleteDogHandler = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await Dog.
+    res.status(200).json({ message: "Dog deleted"})
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
+
 
 
 
@@ -71,4 +96,5 @@ module.exports = {
     getDogsByIdHandler,
     createNewDogHandler,
     getDogsByNameHandler,
+    updateDogHandler,
 }

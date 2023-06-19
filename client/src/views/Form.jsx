@@ -88,7 +88,7 @@ const Form = () => {
   
   useEffect(() => {
     dispatch(getAllTemperaments());
-  }, []);
+  }, );
 
   return (
     <div>

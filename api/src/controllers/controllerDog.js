@@ -160,6 +160,67 @@ const postDog = async (data) => {
   }
 };
 
+//📍 PUT | /dogs
+const updateDog = async (id, data) => {
+  try {
+    const {
+      weightMin,
+      weightMax,
+      height,
+      name,
+      life_span,
+      image,
+      temperament,
+    } = data;
+    if (
+      !weightMin ||
+      !weightMax ||
+      !height ||
+      !name ||
+      !life_span ||
+      !image ||
+      !temperament
+    ) {
+      throw new Error(
+        "Missing information, please complete the required data."
+      );
+    } else {
+      await Dog.update(
+        {
+          name: name,
+          height: height,
+          life_span: life_span,
+          image: image,
+          weightMin: weightMin,
+          weightMax: weightMax,
+          averageWeight: (weightMax + weightMin) / 2,
+        },
+        {
+          where: {
+            id: id,
+            createdAt: {
+              [Op.ne]: null, // el operador op.ne es igual a (diferente de) 
+            },
+          },
+        }
+      );
+      let temp = await Temperament.findAll({
+        where: {
+          name: temperament,
+        },
+      });
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+ 
+
+
+
+
+
+
 
 
 module.exports = {
@@ -169,4 +230,6 @@ module.exports = {
   getDogById,
   getAllDogs,
   postDog,
+  updateDog,
+
 };

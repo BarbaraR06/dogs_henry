@@ -6,7 +6,7 @@ body{
 .container {
   display: flex;
   justify-content: center;
-  align-items: end;
+  align-items: flex-end;
   margin-right: 300px;
 }
 
