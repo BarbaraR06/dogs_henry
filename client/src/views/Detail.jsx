@@ -33,7 +33,7 @@ const Detail = () => {
   }
 
   // Verificar si el temperamento proviene de la base de datos o de la API
-  const isFromDatabase = Array.isArray(dog.temperament);
+  const isFromDatabase = Array.isArray(dogDetail.temperament);
 
   return (
     <div className={styles.mainContainer + " " + styles.Detail}>
