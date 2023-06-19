@@ -5,7 +5,7 @@ import validate from "../components/Validate";
 import { Link } from "react-router-dom";
 import styles from "../css/Form.module.css";
 import { Navigate } from "react-router-dom";
-import descarga from "../img/descarga.jfif";
+
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -15,10 +15,10 @@ const Form = () => {
   const [inputs, setInputs] = useState({
     name: "",
     height: "",
-    image: descarga,
+    image: "",
     life_span: "",
-    weightMax: "",
-    weightMin: "",
+    weightMax: "0",
+    weightMin: "0",
     temperament: [],
   });
 
@@ -54,10 +54,10 @@ const Form = () => {
     );
   };
 
-  const handleDelete = (event) => {
+  const handleDelete = (temp) => {
     setInputs({
       ...inputs,
-      temperament: inputs.temperament.filter((inst) => inst !== event),
+      temperament: inputs.temperament.filter((inst) => inst !== temp),
     });
   };
 
@@ -69,23 +69,16 @@ const Form = () => {
     setInputs({
       name: "",
       height: "",
-      image: descarga,
+      image: "",
       life_span: "",
-      weightMax: "",
-      weightMin: "",
+      weightMax: "0",
+      weightMin: "0",
       temperament: [],
     });
     setErrors({});
     setRedirectToHome(true);
   };
 
-  const handleSelectDefaultImage = () => {
-    setInputs({
-      ...inputs,
-      image: descarga,
-    });
-  };
-  
   useEffect(() => {
     dispatch(getAllTemperaments());
   }, []);
@@ -108,7 +101,17 @@ const Form = () => {
             />
             {errors.name && <strong>{errors.name}</strong>}
           </div>
-
+          <div>
+            <label>Image: </label>
+            <input
+              type="text"
+              name="image"
+              value={inputs.image}
+              placeholder={"Format jpg or png"}
+              onChange={(event) => handleInputs(event)}
+            />
+            {errors.image && <strong>{errors.image}</strong>}
+          </div>
           <br />
 
           <div>
@@ -177,11 +180,7 @@ const Form = () => {
                 <option className={styles.opciones} value="all"></option>
                 {temperaments.map((temp) => {
                   return (
-                    <option
-                      className={styles.opciones}
-                      value={temp}
-                      key={temp}
-                    >
+                    <option className={styles.opciones} value={temp} key={temp}>
                       {temp}
                     </option>
                   );
@@ -211,13 +210,6 @@ const Form = () => {
                 Add my dog
               </button>
               {errors.temperament && <strong>{errors.temperament}</strong>}
-              <button
-                type="button"
-                onClick={handleSelectDefaultImage}
-                className={styles.button}
-              >
-                Select Default Image
-              </button>
             </div>
           </label>
         </div>
