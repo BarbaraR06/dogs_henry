@@ -11,22 +11,20 @@ import {
   FILTER_BY_TEMPER,
   RESET_DETAIL,
   SET_CURRENT_PAGE,
-  UPDATE_DOG, 
-  UPDATE_DOG_FAILURE,
 } from "../actionTypes/index";
 
 
 
 export const createNewDog = (payload) => {
   return async (dispatch) => {
-    let newDog = await axios.post("/dogs", payload);
+    let newDog = await axios.post("http://localhost:3001/dogs", payload);
     return newDog;
   };
 };
 
 export const getAllDogs = () => {
   return async (dispatch) => {
-    const response = await axios.get("/dogs");
+    const response = await axios.get("http://localhost:3001/dogs");
     return dispatch({
       type: GET_ALL_DOGS,
       payload: response.data,
@@ -36,7 +34,7 @@ export const getAllDogs = () => {
 
 export const getAllTemperaments = () => {
   return async (dispatch) => {
-    const json = await axios.get("/temperaments");
+    const json = await axios.get("http://localhost:3001/temperaments");
     let temperamentsAll = json.data.map((el) => el.name);
     return dispatch({
       type: GET_ALL_TEMPS,
@@ -49,7 +47,7 @@ export const getDogByName = (name) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `/dogs?name=${name}`
+        `http://localhost:3001/dogs?name=${name}`
         
       );
       return dispatch({
@@ -65,7 +63,7 @@ export const getDogByName = (name) => {
 export const getDogDetail = (id) => {
   return (dispatch) => {
     axios
-      .get(`/dogs/${id}`)
+      .get(`http://localhost:3001/dogs/${id}`)
       .then((response) => {
         dispatch({
           type: GET_DOG_DETAIL,
@@ -123,23 +121,5 @@ export const setCurrentPage = (payload) => {
   return {
     type: SET_CURRENT_PAGE,
     payload,
-  };
-};
-
-export const updateDog = (id, data) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.put(`/dogs/${id}`, data);
-      dispatch({
-        type: UPDATE_DOG,
-        payload: response.data,
-      });
-
-    } catch (error) {
-      dispatch({
-        type: UPDATE_DOG_FAILURE,
-        payload: error.message,
-      });
-    };
   };
 };

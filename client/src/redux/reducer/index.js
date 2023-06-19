@@ -11,14 +11,12 @@ import {
   FILTER_BY_TEMPER,
   RESET_DETAIL,
   SET_CURRENT_PAGE,
-  UPDATE_DOG,
-  UPDATE_DOG_FAILURE,
 } from "../actionTypes";
 
 const initialState = {
   currentPage: 1,
   dogs: [],
-  dogDetail: [],
+  dogDetail: {},
   temperaments: [],
   allDogs: [],
 };
@@ -27,7 +25,6 @@ const reducer = (state = initialState, action) => {
   let arr = [];
 
   switch (action.type) {
-    
     case CREATE_DOG:
       return {
         ...state,
@@ -163,18 +160,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         currentPage: action.payload,
       };
-    
-    case UPDATE_DOG:
-      return {
-        ...state,
-        dog: action.payload,
-      };
-
-      case UPDATE_DOG_FAILURE:
-      return {
-        ...state,
-        error: action.payload.error,
-      }
 
     default:
       return { ...state };
