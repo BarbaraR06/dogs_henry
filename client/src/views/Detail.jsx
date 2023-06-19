@@ -26,7 +26,7 @@ const Detail = ({temperament}) => {
 
   const dog = Array.isArray(dogDetail) ? dogDetail[0] : dogDetail;
 
-  
+
   return (
     <div className={styles.mainContainer + " " + styles.Detail}>
       <NavBar className={styles.navBar} />
@@ -48,7 +48,7 @@ const Detail = ({temperament}) => {
           <h3>Average weight: {dog?.averageWeight}</h3>
           <h3>Height (min - max): {dog?.height.metric}</h3>
           <h3>Life expectancy: {dog?.life_span}</h3>
-          <h3>{temperament}</h3>
+          <h3> Temperaments: {temperament.name}</h3>
         </div>
       </div>
     </div>
