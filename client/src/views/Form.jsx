@@ -203,11 +203,12 @@ const Form = () => {
                   errors.weightMax ||
                   errors.height ||
                   errors.life_span ||
+                  errors.image ||
                   !inputs.temperament.length ||
                   !inputs.name
                 }
               >
-                Add my dog
+                Add dog to the database
               </button>
               {errors.temperament && <strong>{errors.temperament}</strong>}
             </div>
