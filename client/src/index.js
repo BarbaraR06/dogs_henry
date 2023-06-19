@@ -6,8 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import axios from 'axios';
 const rootElement = document.getElementById('root');
 
+axios.defaults.baseURL = 'https://dogshenry-production.up.railway.app';
 
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
