@@ -25,9 +25,14 @@ const Detail = () => {
   if (Object.keys(dogDetail).length === 0) {
     return <div> Cargando... </div>;
   }
-
+  
   const dog = Array.isArray(dogDetail) ? dogDetail[0] : dogDetail;
+  let temperaments = dog.temperament;
 
+  // Verificar si el campo temperamento es un array
+  if (Array.isArray(temperaments)) {
+    temperaments = temperaments.join(", ");
+  }
   return (
     <div className={styles.mainContainer + " " + styles.Detail}>
       <NavBar className={styles.navBar} />

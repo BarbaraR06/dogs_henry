@@ -6,7 +6,7 @@ import Detail from "./views/Detail";
 import Form from './views/Form';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://dogshenry-production.up.railway.app';
+axios.defaults.baseURL = 'https://localhost:3001';
 
 function App() {
   return (
