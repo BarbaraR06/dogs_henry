@@ -86,9 +86,6 @@ const Form = () => {
   return (
     <div>
       {redirectToHome && <Navigate to="/home" />}
-      <Link to="/home" className={styles.button}>
-        Go back
-      </Link>
       <form className={styles.Formulario}>
         <div className={styles.inputs}>
           <div>
@@ -148,7 +145,6 @@ const Form = () => {
                 type="text"
                 name="height"
                 value={inputs.height}
-                placeholder={"For example: 55 "}
                 onChange={(event) => handleInputs(event)}
               />
               {errors.height && <strong>{errors.height}</strong>}
@@ -164,7 +160,6 @@ const Form = () => {
                 type="text"
                 name="life_span"
                 value={inputs.life_span}
-                placeholder={"For example: 10 - 15 years"}
                 onChange={(event) => handleInputs(event)}
               />
               {errors.life_span && <strong>{errors.life_span}</strong>}
@@ -186,7 +181,6 @@ const Form = () => {
                   );
                 })}
               </select>
-              <h4>My dog is...</h4>
               {inputs.temperament.map((temp) => (
                 <div className={styles.toDelete} key={temp}>
                   <p>{temp}</p>
@@ -212,6 +206,9 @@ const Form = () => {
               {errors.temperament && <strong>{errors.temperament}</strong>}
             </div>
           </label>
+          <Link to="/home" className={styles.buttonBack}>
+        Go back to Home
+      </Link>
         </div>
       </form>
     </div>

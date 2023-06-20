@@ -25,15 +25,12 @@ const Detail = () => {
   }
 
   const dog = Array.isArray(dogDetail) ? dogDetail[0] : dogDetail;
+  
+
   let temperaments = dog.temperament;
-
-  // Verificar si el campo temperamento es un array
-  if (Array.isArray(temperaments)) {
-    temperaments = temperaments.join(", ");
-  }
-
-  // Verificar si el temperamento proviene de la base de datos o de la API
-  const isFromDatabase = Array.isArray(dogDetail.temperament);
+  if (dogDetail.Temperaments && dogDetail.Temperaments.length > 0) {
+    temperaments = dogDetail.Temperaments[0].name;
+  } 
 
   return (
     <div className={styles.mainContainer + " " + styles.Detail}>
@@ -56,11 +53,7 @@ const Detail = () => {
           <h3>Average weight: {dog?.averageWeight}</h3>
           <h3>Height (min - max): {dog?.height.metric}</h3>
           <h3>Life expectancy: {dog?.life_span}</h3>
-          {isFromDatabase ? (
-            <h3>Temperament: {temperaments}</h3>
-          ) : (
-            <h3>Temperament: {temperaments}</h3>
-          )}
+          <h3>Temperament: {temperaments}</h3>
         </div>
       </div>
     </div>

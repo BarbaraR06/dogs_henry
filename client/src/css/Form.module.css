@@ -3,11 +3,9 @@
     background-size: 120%;
     display: flex;
     flex-direction: column;
-    border-radius: 20px;
     padding: 20px;
-    font-family: 'Times New Roman', Times;
+    font-family: "Chicken";
     font-size: 20px;
-    font-weight: bold;
     width: 50%; /* Ancho del formulario para ocupar la mitad de la pantalla */
     margin: auto; 
   }
@@ -22,7 +20,7 @@
   .inputs input {
     width: 100%;
     height: 25px;
-    border-radius: 10px;
+    background-color: #1AB3AB;
   }
   
   strong {
@@ -47,16 +45,23 @@
   }
   
   .button {
-    font-family: "Marker Felt", fantasy;
-    background-color: rgba(255, 255, 255, 0.884);
+    font-family: "Chicken";
+    background-color: #6390da;
     color: rgb(9, 9, 9);
-    border-radius: 4px;
+    cursor: pointer;
+    padding: 15px;
+    margin-top: 35px;
+    transition: all 0.3s ease 0s;
+  }
+  .buttonBack {
+    font-family: "Chicken";
+    background-color: #151F2F;
+    color: rgb(255, 255, 255);
     cursor: pointer;
     padding: 10px;
     margin-top: 18px;
-    transition: all 0.3s ease 0s;
   }
-  
+
   .button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -85,14 +90,13 @@
   
   .toDelete {
     display: flex;
-    background-color: #3f51b5;
-    border-radius: 4px;
+    background-color: #1AB3AB;
+    border-radius: 30px;
     margin-top: 1%;
-    margin-left: 40px;
-    margin-right: 40px;
-    width: 120px;
+    margin-left: 60px;
+    margin-right: 60px;
+    width: 200px;
     padding: 5px;
-    font-weight: bold;
     justify-content: space-evenly;
   }
   
@@ -102,6 +106,6 @@
   
   .toDelete button:hover {
     transition: 0.3s;
-    background-color: red;
-    color: white;
+    background-color: rgb(95, 92, 92);
+    color: #F8EFAF;
   }

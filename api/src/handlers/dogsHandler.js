@@ -3,8 +3,8 @@ const {
   getDogsName,
   getDogById,
   postDog,
-  updateDog, 
-  deleteDog } = require('../controllers/controllerDog');
+  updateDog,  
+  deleteDog} = require('../controllers/controllerDog');
 
 
 //📍 GET | /dogs
@@ -81,8 +81,8 @@ const updateDogHandler = async (req, res) => {
 const deleteDogHandler = async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await Dog.
-    res.status(200).json({ message: "Dog deleted"})
+    const result = await Dog.deleteDog(id);
+    res.status(200).json({ message: "Dog deleted", result });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -97,4 +97,5 @@ module.exports = {
     createNewDogHandler,
     getDogsByNameHandler,
     updateDogHandler,
+    deleteDogHandler,
 }
