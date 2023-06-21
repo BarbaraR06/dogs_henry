@@ -3,8 +3,7 @@ const {
   getDogsName,
   getDogById,
   postDog,
-  updateDog,  
-  deleteDog} = require('../controllers/controllerDog');
+} = require('../controllers/controllerDog');
 
 
 //📍 GET | /dogs
@@ -54,39 +53,16 @@ const getDogsByNameHandler = async (req, res) => {
 };
 
 
-
+//📍 POST | /dogs
 const createNewDogHandler = async (req, res) => {
   let payload = req.body;
   try {
     const newDog = await postDog(payload);
-    res.status(200).json({ dog: newDog }); // Envia los datos del perro creado
+    res.status(200).json({ dog: newDog }); 
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
-
-//📍 PUT | /dogs
-const updateDogHandler = async (req, res) => {
-  const { id } = req.params; //para obtener el identificador unico del perro
-  const data = req.body; //body se utiliza para obtener los datos actualizados del perro
-
-  try {
-    const result = await updateDog(id, data);
-    res.status(200).json({ message: "Dog updated", result });
-  } catch {
-    res.status(400).json({ error: error.message });
-  }
-};
-
-const deleteDogHandler = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const result = await Dog.deleteDog(id);
-    res.status(200).json({ message: "Dog deleted", result });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-}
 
 
 
@@ -96,6 +72,4 @@ module.exports = {
     getDogsByIdHandler,
     createNewDogHandler,
     getDogsByNameHandler,
-    updateDogHandler,
-    deleteDogHandler,
 }

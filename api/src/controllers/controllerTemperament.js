@@ -6,7 +6,11 @@ const getAllTemperaments = async () => {
   const allData = await axios.get("https://api.thedogapi.com/v1/breeds");
   try {
     let everyTemperament = allData.data
-      .map((dog) => (dog.temperament ? dog.temperament : "No info"))
+      .map((dog) => 
+      (dog.temperament 
+        ? dog.temperament 
+        : "No info"
+        ))
       .map((dog) => dog?.split(", "))
       .flat();
 
@@ -41,5 +45,5 @@ const getAllTemperaments = async () => {
 
 
 module.exports = {
-  getAllTemperaments
+  getAllTemperaments,
 };

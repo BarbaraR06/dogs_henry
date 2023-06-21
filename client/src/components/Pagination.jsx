@@ -7,7 +7,7 @@ const Pagination = ({ dogsPerPage, dogs, pagination }) => {
   
     const currentPage = useSelector((state) => state.currentPage);
   
-    for (let i = 1; i <= Math.floor(dogs / dogsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(dogs / dogsPerPage); i++) {
       pageNumbers.push(i);
     }
   
